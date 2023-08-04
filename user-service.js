@@ -79,6 +79,19 @@ module.exports.checkUser = function (userData) {
     });
 };
 
+module.exports.getUserName = function (id) {
+    return new Promise(function (resolve, reject) {
+
+        User.findById(id)
+            .exec()
+            .then(user => {
+                resolve(user.userName)
+            }).catch(err => {
+                reject(`Unable to get favourites for user with id: ${id}`);
+            });
+    });
+}
+
 module.exports.getFavourites = function (id) {
     return new Promise(function (resolve, reject) {
 

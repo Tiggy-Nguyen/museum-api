@@ -65,7 +65,15 @@ app.post("/api/user/login", async (req, res) => {
     });
 });
 
+app.get("/api/user/get-user", passport.authenticate('jwt', { session: false }), (req, res) => {
+    userService.getUserName(req.user._id)
+    .then(data => {
+        res.json(data);
+    }).catch(msg => {
+        res.status(422).json({ error: msg });
+    })
 
+});
 
 app.get("/api/user/favourites", passport.authenticate('jwt', { session: false }), (req, res) => {
     userService.getFavourites(req.user._id)
