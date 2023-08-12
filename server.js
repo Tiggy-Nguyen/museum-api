@@ -56,7 +56,7 @@ app.post("/api/user/login", async (req, res) => {
     .then((user) => {
         const payload = {
             _id: user._id,
-            userName: user.username,
+            userName: user.userName,
         };
         const token = jwt.sign(payload, process.env.JWT_SECRET);
         res.json({ "message": "login successful", token, UserName:user.userName});
